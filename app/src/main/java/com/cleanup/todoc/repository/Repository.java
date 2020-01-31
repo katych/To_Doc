@@ -1,22 +1,24 @@
-package com.cleanup.todoc;
+package com.cleanup.todoc.repository;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.cleanup.todoc.dao.TaskDao;
+import com.cleanup.todoc.database.DataBase;
 import com.cleanup.todoc.model.Task;
 
 import java.util.List;
 
 public class Repository {
 
-    private Dao dao;
+    private TaskDao dao;
     private LiveData<List<Task>> allTask;
 
     public Repository(Application application) {
 
         DataBase dataBase = DataBase.getInstance(application);
-        dao = dataBase.dao();
+        dao = dataBase.taskDao();
         allTask = dao.getAllTasks();
 
     }
@@ -45,9 +47,9 @@ public class Repository {
 
     private static class InsertTaskAsyncTask extends AsyncTask<Task,Void , Void>{
 
-        private Dao dao ;
+        private TaskDao dao ;
 
-        public InsertTaskAsyncTask(Dao dao) {
+        public InsertTaskAsyncTask(TaskDao dao) {
             this.dao = dao;
         }
 
@@ -59,9 +61,9 @@ public class Repository {
     }
     private static class UpdateTaskAsyncTask extends AsyncTask<Task,Void , Void>{
 
-        private Dao dao ;
+        private TaskDao dao ;
 
-        public UpdateTaskAsyncTask(Dao dao) {
+        public UpdateTaskAsyncTask(TaskDao dao) {
             this.dao = dao;
         }
 
@@ -73,9 +75,9 @@ public class Repository {
     }
     private static class DeletetTaskAsyncTask extends AsyncTask<Task,Void , Void>{
 
-        private Dao dao ;
+        private TaskDao dao ;
 
-        public DeletetTaskAsyncTask(Dao dao) {
+        public DeletetTaskAsyncTask(TaskDao dao) {
             this.dao = dao;
         }
 
@@ -87,9 +89,9 @@ public class Repository {
     }
     private static class DeleteAllTaskAsyncTask extends AsyncTask<Void,Void , Void>{
 
-        private Dao dao ;
+        private TaskDao dao ;
 
-        public DeleteAllTaskAsyncTask(Dao dao) {
+        public DeleteAllTaskAsyncTask(TaskDao dao) {
             this.dao = dao;
         }
 
