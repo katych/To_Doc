@@ -44,7 +44,8 @@ public static synchronized DataBase getInstance(Context context){
      * Returns a callback to add the projects in the database
      * @return a callback to add the projects in the database
      */
-    private static Callback prepopulateDatabase() {
+
+  /*  private static Callback prepopulateDatabase() {
         return new Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -66,5 +67,5 @@ public static synchronized DataBase getInstance(Context context){
                 db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
             }
         };
-    }
+    }*/
 }

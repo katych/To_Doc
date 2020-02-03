@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * List of all current tasks of the application
      */
     @NonNull
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private  ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * The adapter which handles the list of tasks
@@ -257,13 +257,13 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      */
     private void updateTasks(List<Task> tasks) {
 
-       tasks = (ArrayList<Task>) tasks;
+      this.tasks = (ArrayList<Task>) tasks;
 
         if (tasks.size() == 0) {
             lblNoTasks.setVisibility(View.VISIBLE);
             listTasks.setVisibility(View.GONE);
         } else {
-            lblNoTasks.setVisibility(View.GONE);
+            lblNoTasks.setVisibility(View.INVISIBLE);
             listTasks.setVisibility(View.VISIBLE);
             switch (sortMethod) {
                 case ALPHABETICAL:
