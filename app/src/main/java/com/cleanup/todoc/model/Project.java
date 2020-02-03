@@ -21,21 +21,21 @@ public class Project {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    public final long id;
+    private final long id;
 
     /**
      * The name of the project
      */
     @NonNull
     @ColumnInfo(name = "name")
-    public final String name;
+    private final String name;
 
     /**
      * The hex (ARGB) code of the color associated to the project
      */
     @ColorInt
     @ColumnInfo(name = "color")
-    public final int color;
+    private final int color;
 
     /**
      * Instantiates a new Project.

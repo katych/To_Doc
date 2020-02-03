@@ -6,40 +6,67 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.annotation.NonNull;
 
+import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.repository.Repository;
+import com.cleanup.todoc.repositories.ProjectRepository;
+import com.cleanup.todoc.repositories.TaskRepository;
 
 import java.util.List;
 
 public class ViewModel extends AndroidViewModel {
-    private Repository repository;
+
+    private TaskRepository taskRepository;
+    private ProjectRepository projectRepository;
     LiveData<List<Task>> allTasks;
+    LiveData<List<Project>> allProjects;
+
 
     public ViewModel(@NonNull Application application) {
         super(application);
 
-        repository = new Repository(application);
-        allTasks= repository.getAllTask();
+        taskRepository = new TaskRepository(application);
+        allTasks= taskRepository.getAllTask();
+
+        projectRepository= new ProjectRepository(application);
+       allProjects =projectRepository.getAllProjects();
     }
 
     public void insert (Task task){
-        repository.insert(task);
+        taskRepository.insert(task);
     }
 
    public void update (Task task) {
-        repository.update(task);
+        taskRepository.update(task);
    }
 
     public void delete (Task task) {
-        repository.delete(task);
+        taskRepository.delete(task);
     }
 
     public void deleteAllTask () {
-        repository.deleteAllTasks();
+        taskRepository.deleteAllTasks();
     }
 
     public LiveData<List<Task>> getAllTasks(){
         return allTasks;
+    }
+
+
+
+    public void insertProject (Project project){
+        projectRepository.insertProject(project);
+    }
+
+    public void updateProject (Project project) { projectRepository.updateProject(project); }
+
+    public void deleteProject (Project project) { projectRepository.deleteProject(project); }
+
+    public void deleteAllProjects () {
+        projectRepository.deleteAllProjects();
+    }
+
+    public LiveData<List<Project>> getAllProjects(){
+        return allProjects;
     }
 
 }

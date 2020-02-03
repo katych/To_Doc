@@ -1,4 +1,4 @@
-package com.cleanup.todoc.repository;
+package com.cleanup.todoc.repositories;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
@@ -10,34 +10,34 @@ import com.cleanup.todoc.model.Task;
 
 import java.util.List;
 
-public class Repository {
+public class TaskRepository {
 
-    private TaskDao dao;
+    private TaskDao taskDao;
     private LiveData<List<Task>> allTask;
 
-    public Repository(Application application) {
+    public TaskRepository(Application application) {
 
         DataBase dataBase = DataBase.getInstance(application);
-        dao = dataBase.taskDao();
-        allTask = dao.getAllTasks();
+        taskDao = dataBase.taskDao();
+        allTask = taskDao.getAllTasks();
 
     }
 
     public void insert(Task task) {
-        new InsertTaskAsyncTask(dao).execute(task);
+        new InsertTaskAsyncTask(taskDao).execute(task);
     }
 
     public void update(Task task) {
 
-        new UpdateTaskAsyncTask(dao).execute(task);
+        new UpdateTaskAsyncTask(taskDao).execute(task);
     }
 
     public void delete(Task task) {
-        new DeletetTaskAsyncTask(dao).execute(task);
+        new DeletetTaskAsyncTask(taskDao).execute(task);
     }
 
     public void deleteAllTasks() {
-        new DeleteAllTaskAsyncTask(dao).execute();
+        new DeleteAllTaskAsyncTask(taskDao).execute();
     }
 
     public LiveData<List<Task>> getAllTask() {
@@ -47,57 +47,57 @@ public class Repository {
 
     private static class InsertTaskAsyncTask extends AsyncTask<Task,Void , Void>{
 
-        private TaskDao dao ;
+        private TaskDao taskDao ;
 
-        public InsertTaskAsyncTask(TaskDao dao) {
-            this.dao = dao;
+        public InsertTaskAsyncTask(TaskDao taskDao) {
+            this.taskDao = taskDao;
         }
 
         @Override
         protected Void doInBackground(Task... tasks) {
-            dao.insert(tasks[0]);
+            taskDao.insert(tasks[0]);
             return null;
         }
     }
     private static class UpdateTaskAsyncTask extends AsyncTask<Task,Void , Void>{
 
-        private TaskDao dao ;
+        private TaskDao taskDao ;
 
-        public UpdateTaskAsyncTask(TaskDao dao) {
-            this.dao = dao;
+        public UpdateTaskAsyncTask(TaskDao taskDao) {
+            this.taskDao = taskDao;
         }
 
         @Override
         protected Void doInBackground(Task... tasks) {
-            dao.update(tasks[0]);
+            taskDao.update(tasks[0]);
             return null;
         }
     }
     private static class DeletetTaskAsyncTask extends AsyncTask<Task,Void , Void>{
 
-        private TaskDao dao ;
+        private TaskDao taskDao ;
 
-        public DeletetTaskAsyncTask(TaskDao dao) {
-            this.dao = dao;
+        public DeletetTaskAsyncTask(TaskDao taskDao) {
+            this.taskDao = taskDao;
         }
 
         @Override
         protected Void doInBackground(Task... tasks) {
-            dao.delete(tasks[0]);
+            taskDao.delete(tasks[0]);
             return null;
         }
     }
     private static class DeleteAllTaskAsyncTask extends AsyncTask<Void,Void , Void>{
 
-        private TaskDao dao ;
+        private TaskDao taskDao ;
 
-        public DeleteAllTaskAsyncTask(TaskDao dao) {
-            this.dao = dao;
+        public DeleteAllTaskAsyncTask(TaskDao taskDao) {
+            this.taskDao = taskDao;
         }
 
         @Override
         protected Void doInBackground(Void... Voids) {
-            dao.deleteAllTasks();
+            taskDao.deleteAllTasks();
             return null;
         }
     }

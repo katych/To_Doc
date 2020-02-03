@@ -71,7 +71,6 @@ public class DaoTest {
     public void insertAndGetTask() throws InterruptedException {
         projectDao.insertProject(PROJECT1);
         taskDao.insert(TASK1);
-
         Task task = LiveDataTestUtil.getValue(taskDao.getAllTasks()).get(0);
         assertTrue(task.getName().equals(TASK1.getName()) && task.getId() == TASK1.getId());
     }

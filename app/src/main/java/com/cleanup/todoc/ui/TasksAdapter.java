@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cleanup.todoc.R;
-import com.cleanup.todoc.ViewModel;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
