@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * List of all current tasks of the application
      */
     @NonNull
-    private  ArrayList<Task> tasks = new ArrayList<>();
+    private  final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * The adapter which handles the list of tasks
@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
           */
 
-      configuViewModel();
+
+      configViewModel();
 
 
     }
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             sortMethod = SortMethod.RECENT_FIRST;
         }
 
-        updateTasks(tasks);
+        updateTasks();
 
         return super.onOptionsItemSelected(item);
     }
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     public void onDeleteTask(Task task) {
         viewModel.delete(task);
         tasks.remove(task);
-        updateTasks(tasks);
+        updateTasks();
 
         Log.d("TAAAAAAAAG", "onDeleteTask: "+ tasks.size());
 
@@ -202,13 +203,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
                 addTask(task);
 
 
-                /**
-                 *
-                 * insert task to data
-                 */
-
-                //viewModel.insert(task);
-                //Toast.makeText(this, "Task saved", Toast.LENGTH_SHORT).show();
 
                 dialogInterface.dismiss();
             }
@@ -247,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private void addTask(@NonNull Task task) {
         viewModel.insert(task);
         tasks.add(task);
-        updateTasks(tasks);
+        updateTasks();
         Log.d("TAaaaaaaaG", "onCreate: "+tasks.size());
 
     }
@@ -255,15 +249,13 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * Updates the list of tasks in the UI
      */
-    private void updateTasks(List<Task> tasks) {
-
-      this.tasks = (ArrayList<Task>) tasks;
+    private void updateTasks() {
 
         if (tasks.size() == 0) {
             lblNoTasks.setVisibility(View.VISIBLE);
             listTasks.setVisibility(View.GONE);
         } else {
-            lblNoTasks.setVisibility(View.INVISIBLE);
+            lblNoTasks.setVisibility(View.GONE);
             listTasks.setVisibility(View.VISIBLE);
             switch (sortMethod) {
                 case ALPHABETICAL:
@@ -340,19 +332,33 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
 
-    private void configuViewModel() {
+    /**
+     *
+     * insert task to data
+     */
+
+    private void configViewModel() {
 
         viewModel = ViewModelProviders.of(this).get(ViewModel.class);
         viewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
-                adapter.setTasks(tasks);
+                if (tasks != null & tasks.size() == 0) {
+                    lblNoTasks.setVisibility(View.VISIBLE);
+                    listTasks.setVisibility(View.GONE);
+                } else {
+                    lblNoTasks.setVisibility(View.INVISIBLE);
+                    listTasks.setVisibility(View.VISIBLE);
 
+                    adapter.setTasks(tasks);
+
+                }
             }
         });
 
 
     }
+
 
 
         /**
