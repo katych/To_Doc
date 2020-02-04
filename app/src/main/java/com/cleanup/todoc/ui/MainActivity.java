@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +23,6 @@ import com.cleanup.todoc.R;
 import com.cleanup.todoc.ViewModel;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -126,10 +123,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
       configViewModel();
 
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -151,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             sortMethod = SortMethod.RECENT_FIRST;
         }
 
+
         updateTasks();
 
         return super.onOptionsItemSelected(item);
@@ -161,8 +156,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         viewModel.delete(task);
         tasks.remove(task);
         updateTasks();
-
-        Log.d("TAAAAAAAAG", "onDeleteTask: "+ tasks.size());
 
     }
 
@@ -242,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         viewModel.insert(task);
         tasks.add(task);
         updateTasks();
-        Log.d("TAaaaaaaaG", "onCreate: "+tasks.size());
 
     }
 
@@ -346,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
                     lblNoTasks.setVisibility(View.VISIBLE);
                     listTasks.setVisibility(View.GONE);
                 } else {
-                    lblNoTasks.setVisibility(View.INVISIBLE);
+                    lblNoTasks.setVisibility(View.GONE);
                     listTasks.setVisibility(View.VISIBLE);
 
                     adapter.setTasks(tasks);
@@ -357,8 +349,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
 
     }
-
-
 
         /**
          * List of all possible sort methods for task

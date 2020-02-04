@@ -1,11 +1,14 @@
 package com.cleanup.todoc;
 
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cleanup.todoc.database.DataBase;
 import com.cleanup.todoc.ui.MainActivity;
 
 import org.junit.Rule;
@@ -16,9 +19,11 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.cleanup.todoc.TestUtils.withRecyclerView;
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -30,32 +35,56 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityInstrumentedTest {
+
+    private DataBase mDataBase;
+
+    private  int tasksSize ;
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void addAndRemoveTask() {
+    public void addAndRemoveTask() throws InterruptedException {
         MainActivity activity = rule.getActivity();
         TextView lblNoTask = activity.findViewById(R.id.lbl_no_task);
         RecyclerView listTasks = activity.findViewById(R.id.list_tasks);
 
+        if (lblNoTask.getVisibility()== View.VISIBLE)
+        {
+            tasksSize = 0 ;
+        }
+        else
+        {
+            tasksSize  = listTasks.getAdapter().getItemCount();
+        }
+
         onView(withId(R.id.fab_add_task)).perform(click());
         onView(withId(R.id.txt_task_name)).perform(replaceText("Tâche example"));
         onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.list_tasks)).check(matches(isDisplayed()));
 
         // Check that lblTask is not displayed anymore
         assertThat(lblNoTask.getVisibility(), equalTo(View.GONE));
         // Check that recyclerView is displayed
         assertThat(listTasks.getVisibility(), equalTo(View.VISIBLE));
         // Check that it contains one element only
-        assertThat(listTasks.getAdapter().getItemCount(), equalTo(1));
+        assertThat(listTasks.getAdapter().getItemCount(), equalTo(tasksSize+1));
 
-        onView(withId(R.id.img_delete)).perform(click());
+        onView(withId(R.id.list_tasks)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
+        tasksSize = listTasks.getAdapter().getItemCount();
 
-        // Check that lblTask is displayed
-        assertThat(lblNoTask.getVisibility(), equalTo(View.VISIBLE));
-        // Check that recyclerView is not displayed anymore
-        assertThat(listTasks.getVisibility(), equalTo(View.GONE));
+        if (tasksSize == 0 ){
+            // Check that lblTask is displayed
+            assertThat(lblNoTask.getVisibility(), equalTo(View.VISIBLE));
+            // Check that recyclerView is not displayed anymore
+            assertThat(listTasks.getVisibility(), equalTo(View.GONE));
+        }
+else {
+            // Check that lblTask is displayed
+            assertThat(lblNoTask.getVisibility(), equalTo(View.GONE));
+            // Check that recyclerView is not displayed anymore
+            assertThat(listTasks.getVisibility(), equalTo(View.VISIBLE));
+            assertEquals(listTasks.getAdapter().getItemCount(), tasksSize);
+        }
     }
 
     @Test
