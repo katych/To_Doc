@@ -331,7 +331,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         }
     }
 
-
     /**
      *
      * insert task to data
