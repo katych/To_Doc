@@ -29,6 +29,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     @NonNull
     private List<Task> tasks;
 
+
     /**
      * The listener for when a task needs to be deleted
      */
@@ -54,6 +55,16 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         this.tasks = tasks;
         notifyDataSetChanged();
     }
+
+    /**
+     * Returns the current {@link List<Task>}
+     * @return the {@link List<Task>}
+     */
+    @NonNull
+    public List<Task> getCurrentTasks() {
+        return this.tasks;
+    }
+
 
     @NonNull
     @Override
