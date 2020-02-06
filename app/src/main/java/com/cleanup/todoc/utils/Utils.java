@@ -2,7 +2,6 @@ package com.cleanup.todoc.utils;
 
 import androidx.annotation.NonNull;
 
-import com.cleanup.todoc.model.SortMethod;
 import com.cleanup.todoc.model.Task;
 
 import java.util.Collections;

@@ -22,7 +22,7 @@ import com.cleanup.todoc.R;
 import com.cleanup.todoc.utils.Utils;
 import com.cleanup.todoc.viewModel.ViewModel;
 import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.SortMethod;
+import com.cleanup.todoc.utils.SortMethod;
 import com.cleanup.todoc.model.Task;
 import java.util.ArrayList;
 import java.util.Date;

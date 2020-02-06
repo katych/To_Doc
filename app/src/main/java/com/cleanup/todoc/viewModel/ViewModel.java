@@ -1,7 +1,6 @@
 package com.cleanup.todoc.viewModel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -9,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.SortMethod;
+import com.cleanup.todoc.utils.SortMethod;
 import com.cleanup.todoc.model.Task;
 import com.cleanup.todoc.repositories.ProjectRepository;
 import com.cleanup.todoc.repositories.TaskRepository;
