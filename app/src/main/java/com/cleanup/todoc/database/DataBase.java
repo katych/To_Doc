@@ -45,27 +45,5 @@ public static synchronized DataBase getInstance(Context context){
      * @return a callback to add the projects in the database
      */
 
-  /*  private static Callback prepopulateDatabase() {
-        return new Callback() {
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("id", 1L);
-                contentValues.put("name", "Projet Tartampion");
-                contentValues.put("color", 0xFFEADAD1);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
 
-                contentValues.put("id", 2L);
-                contentValues.put("name", "Projet Lucidia");
-                contentValues.put("color", 0xFFB4CDBA);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
-
-                contentValues.put("id", 3L);
-                contentValues.put("name", "Projet Circus");
-                contentValues.put("color", 0xFFA3CED2);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
-            }
-        };
-    }*/
 }

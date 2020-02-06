@@ -23,8 +23,6 @@ public class ViewModel extends AndroidViewModel {
     private LiveData<List<Task>> allTasks;
     private LiveData<List<Project>> allProjects;
     private MutableLiveData<SortMethod> mSortMethodData = new MutableLiveData<>();
-    private SortMethod mSortMethod;
-
 
     public ViewModel(@NonNull Application application) {
         super(application);
@@ -86,21 +84,6 @@ public class ViewModel extends AndroidViewModel {
         mSortMethodData.setValue(mSortMethod);
         return mSortMethodData;
 
-    }
-
-
-   /* public void sortTasks(SortMethod sortMethod) {
-      mSortMethod = sortMethod;
-      mSortMethodData.setValue(sortMethod);
-
-    }*/
-
-   public SortMethod getSort() {
-        if (mSortMethodData == null) {
-            mSortMethodData.setValue(SortMethod.NONE);
-            return mSortMethodData.getValue();
-        }
-        return mSortMethodData.getValue();
     }
 
 }
