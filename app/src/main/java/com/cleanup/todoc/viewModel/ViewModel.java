@@ -82,7 +82,6 @@ public class ViewModel extends AndroidViewModel {
     public LiveData<SortMethod> updateSortMethod(SortMethod mSortMethod) {
         mSortMethodData.setValue(mSortMethod);
         return mSortMethodData;
-
     }
 
 }
