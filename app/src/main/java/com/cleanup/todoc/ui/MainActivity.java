@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         });
 
       configViewModel();
-      configuSorts();
+      configSorts();
 
     }
 
@@ -132,25 +132,25 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
           case R.id.filter_alphabetical:
               sortMethod = SortMethod.ALPHABETICAL;
               updateSorts(sortMethod);
-              configuSorts();
+              configSorts();
               break;
 
           case R.id.filter_alphabetical_inverted:
               sortMethod = SortMethod.ALPHABETICAL_INVERTED;
               updateSorts(sortMethod);
-              configuSorts();
+              configSorts();
               break;
 
           case R.id.filter_oldest_first:
               sortMethod = SortMethod.OLD_FIRST;
               updateSorts(sortMethod);
-              configuSorts();
+              configSorts();
               break;
 
           case R.id.filter_recent_first:
               sortMethod = SortMethod.RECENT_FIRST;
               updateSorts(sortMethod);
-              configuSorts();
+              configSorts();
               break;
       }
 
@@ -352,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
 
-   private void configuSorts() {
+   private void configSorts() {
         viewModel.updateSortMethod(sortMethod).observe(this, this::updateSorts);
     }
 

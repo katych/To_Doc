@@ -1,15 +1,9 @@
 package com.cleanup.todoc.database;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-
-import android.content.ContentValues;
 import android.content.Context;
-
 import com.cleanup.todoc.dao.ProjectDao;
 import com.cleanup.todoc.dao.TaskDao;
 import com.cleanup.todoc.model.Project;
@@ -40,10 +34,6 @@ public static synchronized DataBase getInstance(Context context){
     }
     return instance;
 }
-    /**
-     * Returns a callback to add the projects in the database
-     * @return a callback to add the projects in the database
-     */
 
 
 }
