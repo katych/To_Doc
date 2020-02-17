@@ -344,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
     /**
-     * UPDATE SOTS
+     * UPDATE SORTS
      */
 
     private void updateSorts(SortMethod mSortMethod){
