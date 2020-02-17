@@ -34,6 +34,7 @@ public static synchronized DataBase getInstance(Context context){
 
         instance = Room.databaseBuilder(context.getApplicationContext(),
                 DataBase.class,"database")
+                .fallbackToDestructiveMigration()
                 .addCallback(prepopulateDatabase())
                 .build();
     }
